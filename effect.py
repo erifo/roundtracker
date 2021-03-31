@@ -10,4 +10,4 @@ class Effect:
         h = self.rounds//600
         m = (self.rounds%600)//10
         r = (self.rounds%600%10)
-        return str(h).ljust(10) + str(m).ljust(10) + str(r).ljust(10) + self.name
+        return str(h).ljust(8) + str(m).ljust(8) + str(r).ljust(8) + self.name

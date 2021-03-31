@@ -32,3 +32,6 @@ class RTModel:
                     self.add_effect(name, int(rounds))
         except:
             print("Unable to find file. Skipping load step.")
+    
+    def sort(self, method, rev=False):
+        self.effects.sort(key=method, reverse=rev)

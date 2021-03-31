@@ -22,6 +22,7 @@ class RTView:
         timefactor = self.timefactors[timefactor_string]
         #---
         self.model.add_effect(name, int(duration)*timefactor)
+        self.__sort()
         self.model.save()
 
     def __remove_effect(self):
@@ -48,6 +49,16 @@ class RTView:
         #---
         self.model.tick_effects(mode*timefactor*duration)
         self.model.save()
+    
+    def __sort(self):
+        method = core.get_value("##sorting_method")
+        if (method == "Descending"):
+            self.model.sort(lambda x: x.rounds, rev=True)
+        elif (method == "Ascending"):
+            self.model.sort(lambda x: x.rounds, rev=False)
+        elif (method == "Alphabetical"):
+            self.model.sort(lambda x: x.name.upper())
+        self.model.save()
         
 
     def __render(self):
@@ -55,7 +66,7 @@ class RTView:
 
     def show(self):
         with simple.window("Main Window"):
-            core.set_main_window_size(450, 320)
+            core.set_main_window_size(455, 330)
             core.set_main_window_resizable(False)
             core.set_main_window_title("Roundtracker")
             #---
@@ -67,7 +78,11 @@ class RTView:
             core.end()
             #---
             core.add_separator()
-            core.add_text("Hrs".ljust(10) + "Min".ljust(10) + "Rnd".ljust(10) + "Effect")
+            core.add_group("##group_listinfo", horizontal=True)
+            core.add_text("Hrs".ljust(8) + "Min".ljust(8) + "Rnd".ljust(8) + "Effect")
+            core.add_dummy(width=85)
+            core.add_combo("##sorting_method", items=["Ascending", "Descending", "Alphabetical"], width=110, default_value="Sort By...", callback=self.__sort)
+            core.end()
             core.add_listbox('##effect_list', width=425, num_items=11)
             #core.add_table('Effects', ['Hours','Minutes','Rounds','Names'], height=200, width=500)
             core.add_separator()

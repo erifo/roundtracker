@@ -113,5 +113,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Plain-text files
+# Custom
 *.txt
+*.bat
+**.exe
+**.7z
