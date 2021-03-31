@@ -55,19 +55,15 @@ class RTView:
 
     def show(self):
         with simple.window("Main Window"):
-            core.set_main_window_size(480, 350)
+            core.set_main_window_size(450, 320)
             core.set_main_window_resizable(False)
             core.set_main_window_title("Roundtracker")
             #---
             core.add_group("##group_new_effect", horizontal=True)
             core.add_input_text("##new_effect_duration", decimal=True, hint="Duration", width=75)
             core.add_combo("##new_effect_timefactor", items=['Hours', 'Minutes', 'Rounds'], default_value="Rounds", width=75)
-            core.add_input_text("##new_effect_name", hint="New effect name", width=200)
-            core.end()
-            #---
-            core.add_group("##group_addremove", horizontal=True)
-            core.add_button("Add effect", callback=self.__add_effect)
-            core.add_button("Remove selected", callback=self.__remove_effect)
+            core.add_input_text("##new_effect_name", hint="New effect name", width=215)
+            core.add_button("Add", callback=self.__add_effect)
             core.end()
             #---
             core.add_separator()
@@ -81,6 +77,8 @@ class RTView:
             core.add_combo("##tick_timefactor", items=['Hours', 'Minutes', 'Rounds'], default_value="Rounds", width=75)
             core.add_combo("##tick_mode", items=['Up', 'Down'], default_value="Down", width=75)
             core.add_button("Tick", callback=self.__tick)
+            core.add_dummy(width=60)
+            core.add_button("Remove", callback=self.__remove_effect)
             core.end()
 
             # Render Callback and Start gui

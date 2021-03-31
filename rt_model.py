@@ -31,4 +31,4 @@ class RTModel:
                     name, rounds = line[:-1].split('|')
                     self.add_effect(name, int(rounds))
         except:
-            print("Loading went wrong.")
+            print("Unable to find file. Skipping load step.")
